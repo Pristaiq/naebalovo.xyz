@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>naebalova.xyz</title>
+<style>
+:root{--bg:#fff;--ink:#111}
+@media (prefers-color-scheme: dark){:root{--bg:#111;--ink:#fff}}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);display:flex;align-items:center;justify-content:center;overflow:hidden}
+#t{
+  font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:700;
+  font-size:clamp(40px,12vw,200px);letter-spacing:-.04em;line-height:1;
+  font-variant-numeric:tabular-nums;white-space:nowrap;
+}
+</style>
+</head>
+<body>
+<div id="t" role="timer" aria-label="Таймер">00:00:00</div>
+<script>
+/* Момент, с которого таймер идёт с нуля. Остановить: удалить файл или заменить страницу. */
+const START=new Date('2026-11-01T14:36:31Z');
+const pad=n=>String(n).padStart(2,'0');
+const t=document.getElementById('t');
+function tick(){
+  let s=Math.max(0,Math.floor((Date.now()-START)/1000));
+  const d=Math.floor(s/86400);s-=d*86400;
+  const h=Math.floor(s/3600);s-=h*3600;
+  const m=Math.floor(s/60);s-=m*60;
+  const text=(d>0?d+':':'')+pad(h)+':'+pad(m)+':'+pad(s);
+  t.textContent=text;document.title=text;
+}
+setInterval(tick,1000);tick();
+</script>
+</body>
+</html>
